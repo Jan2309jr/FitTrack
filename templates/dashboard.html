@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FitTrack</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold">FitTrack</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Welcome Section - Updated Version -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Welcome, <span id="username">User</span>!</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <!-- Personal Info Card -->
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-600">Personal Info</h3>
+                            <div class="mt-2 space-y-1">
+                                <p class="text-sm"><span class="font-medium">Email:</span> <span id="user-email">--</span></p>
+                                <p class="text-sm"><span class="font-medium">Gender:</span> <span id="user-gender">--</span></p>
+                                <p class="text-sm"><span class="font-medium">Age:</span> <span id="user-age">--</span> yrs</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Physical Stats Card -->
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-600">Physical Stats</h3>
+                            <div class="mt-2 space-y-1">
+                                <p class="text-sm"><span class="font-medium">Height:</span> <span id="user-height">--</span> cm</p>
+                                <p class="text-sm"><span class="font-medium">Weight:</span> <span id="current-weight">--</span> kg</p>
+                                <p class="text-sm"><span class="font-medium">BMI:</span> <span id="bmi">--</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Goals Card -->
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-600">Fitness Goal</h3>
+                            <p class="text-xl font-bold mt-2"><span id="fitness-goal">--</span></p>
+                            <p class="text-sm mt-2"><span class="font-medium">Target:</span> <span id="target-weight-display">--</span></p>
+                        </div>
+                       
+                        
+                    </div>
+                </div>
+
+                <!-- Today's Meals -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Today's Meals</h2>
+                        <button id="add-meal-btn" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">Add Meal</button>
+                    </div>
+                    <div id="meals-list" class="space-y-4">
+                        <!-- Meals will be dynamically added here -->
+                        <p class="text-gray-500">No meals logged today.</p>
+                    </div>
+                    <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                        <h3 class="font-semibold">Daily Nutrition Summary</h3>
+                        <div class="grid grid-cols-3 gap-4 mt-2">
+                            <div>
+                                <p class="text-gray-600">Calories</p>
+                                <p><span id="total-calories">0</span> kcal</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Protein</p>
+                                <p><span id="total-protein">0</span> g</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Carbs</p>
+                                <p><span id="total-carbs">0</span> g</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Workouts -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Today's Workouts</h2>
+                        <button id="add-workout-btn" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">Add Workout</button>
+                    </div>
+                    <div id="workouts-list" class="space-y-4">
+                        <!-- Workouts will be dynamically added here -->
+                        <p class="text-gray-500">No workouts logged today.</p>
+                    </div>
+                    <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                        <h3 class="font-semibold">Daily Activity Summary</h3>
+                        <div class="grid grid-cols-3 gap-4 mt-2">
+                            <div>
+                                <p class="text-gray-600">Exercises</p>
+                                <p><span id="total-exercises">0</span></p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Duration</p>
+                                <p><span id="total-duration">0</span> min</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Calories Burned</p>
+                                <p><span id="total-calories-burned">0</span> kcal</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- BMI Calculator -->
+                <div class="bg-white p-6 rounded-lg shadow-md" id="bmi-calculator">
+                    <h2 class="text-xl font-bold mb-4">BMI Calculator</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="height" class="block text-gray-700">Height (cm)</label>
+                            <input type="number" id="height" class="w-full p-2 border rounded-md">
+                        </div>
+                        <div>
+                            <label for="weight" class="block text-gray-700">Weight (kg)</label>
+                            <input type="number" id="weight" class="w-full p-2 border rounded-md">
+                        </div>
+                        <button id="calculate-bmi" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">Calculate BMI</button>
+                        <div id="bmi-result" class="hidden p-4 rounded-md">
+                            <h3 class="font-semibold">Your BMI: <span id="bmi-value">--</span></h3>
+                            <p id="bmi-category" class="mt-2"></p>
+                            <p id="bmi-recommendation" class="mt-2 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fitness Goals -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Fitness Goals</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700">Select Goal</label>
+                            <select id="fitness-goal-select" class="w-full p-2 border rounded-md">
+                                <option value="weight_loss">Weight Loss</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="muscle_gain">Muscle Gain</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="target-weight-input" class="block text-gray-700">Target Weight (kg)</label>
+                            <input type="number" id="target-weight-input" class="w-full p-2 border rounded-md">
+                        </div>
+                        <button id="update-goal" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">Update Goal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Generate Report Button -->
+        <div class="mt-8 text-center">
+            <button id="generate-report-btn" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition text-lg font-medium">
+                Generate Fitness Report
+            </button>
+        </div>
+    </div>
+
+    <!-- Add Meal Modal -->
+    <div id="meal-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg w-full max-w-md">
+            <h2 class="text-xl font-bold mb-4">Add Meal</h2>
+            <form id="meal-form" class="space-y-4">
+                <div>
+                    <label for="meal-name" class="block text-gray-700">Meal Name</label>
+                    <input type="text" id="meal-name" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="meal-time" class="block text-gray-700">Time</label>
+                    <input type="time" id="meal-time" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="meal-calories" class="block text-gray-700">Calories (kcal)</label>
+                    <input type="number" id="meal-calories" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="meal-protein" class="block text-gray-700">Protein (g)</label>
+                    <input type="number" id="meal-protein" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="meal-carbs" class="block text-gray-700">Carbs (g)</label>
+                    <input type="number" id="meal-carbs" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="meal-fat" class="block text-gray-700">Fat (g)</label>
+                    <input type="number" id="meal-fat" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancel-meal" class="px-4 py-2 border rounded-md">Cancel</button>
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Workout Modal -->
+    <div id="workout-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg w-full max-w-md">
+            <h2 class="text-xl font-bold mb-4">Add Workout</h2>
+            <form id="workout-form" class="space-y-4">
+                <div>
+                    <label for="workout-type" class="block text-gray-700">Workout Type</label>
+                    <select id="workout-type" class="w-full p-2 border rounded-md" required>
+                        <option value="cardio">Cardio</option>
+                        <option value="strength">Strength Training</option>
+                        <option value="flexibility">Flexibility</option>
+                        <option value="hiit">HIIT</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="workout-name" class="block text-gray-700">Exercise Name</label>
+                    <input type="text" id="workout-name" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="workout-duration" class="block text-gray-700">Duration (minutes)</label>
+                    <input type="number" id="workout-duration" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div id="strength-fields" class="hidden space-y-4">
+                    <div>
+                        <label for="workout-sets" class="block text-gray-700">Sets</label>
+                        <input type="number" id="workout-sets" class="w-full p-2 border rounded-md">
+                    </div>
+                    <div>
+                        <label for="workout-reps" class="block text-gray-700">Reps</label>
+                        <input type="number" id="workout-reps" class="w-full p-2 border rounded-md">
+                    </div>
+                    <div>
+                        <label for="workout-weight" class="block text-gray-700">Weight (kg)</label>
+                        <input type="number" id="workout-weight" class="w-full p-2 border rounded-md">
+                    </div>
+                </div>
+                <div>
+                    <label for="workout-calories" class="block text-gray-700">Calories Burned</label>
+                    <input type="number" id="workout-calories" class="w-full p-2 border rounded-md" required>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancel-workout" class="px-4 py-2 border rounded-md">Cancel</button>
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Utility functions
+        function createInputField(placeholder, className = '') {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.placeholder = placeholder;
+            input.className = `p-2 border rounded-md w-full ${className}`;
+            return input;
+        }
+
+        function createDeleteButton(callback) {
+            const btn = document.createElement('button');
+            btn.textContent = '❌';
+            btn.className = 'text-red-500 ml-2';
+            btn.onclick = callback;
+            return btn;
+        }
+
+        // State variables
+        let meals = [];
+        let workouts = [];
+
+        // DOM references
+        const mealsList = document.getElementById('meals-list');
+        const workoutsList = document.getElementById('workouts-list');
+        const addMealBtn = document.getElementById('add-meal-btn');
+        const addWorkoutBtn = document.getElementById('add-workout-btn');
+
+        function updateMealSummary() {
+            let calories = 0, protein = 0, carbs = 0;
+            meals.forEach(m => {
+                calories += Number(m.calories.value || 0);
+                protein += Number(m.protein.value || 0);
+                carbs += Number(m.carbs.value || 0);
+            });
+            document.getElementById('total-calories').innerText = calories;
+            document.getElementById('total-protein').innerText = protein;
+            document.getElementById('total-carbs').innerText = carbs;
+        }
+
+        function updateWorkoutSummary() {
+            let exercises = workouts.length;
+            let duration = 0, burned = 0;
+            workouts.forEach(w => {
+                duration += Number(w.duration.value || 0);
+                burned += Number(w.calories.value || 0);
+            });
+            document.getElementById('total-exercises').innerText = exercises;
+            document.getElementById('total-duration').innerText = duration;
+            document.getElementById('total-calories-burned').innerText = burned;
+        }
+
+        function createMealEntry() {
+            const container = document.createElement('div');
+            container.className = 'flex gap-2 items-center';
+
+            const calories = createInputField('Calories (kcal)');
+            const protein = createInputField('Protein (g)');
+            const carbs = createInputField('Carbs (g)');
+
+            const deleteBtn = createDeleteButton(() => {
+                meals = meals.filter(m => m.container !== container);
+                container.remove();
+                updateMealSummary();
+            });
+
+            [calories, protein, carbs].forEach(input => input.oninput = updateMealSummary);
+
+            container.append(calories, protein, carbs, deleteBtn);
+            mealsList.appendChild(container);
+            meals.push({ container, calories, protein, carbs });
+
+            updateMealSummary();
+        }
+
+        function createWorkoutEntry() {
+            const container = document.createElement('div');
+            container.className = 'flex gap-2 items-center';
+
+            const exercise = document.createElement('input');
+            exercise.type = 'text';
+            exercise.placeholder = 'Exercise';
+            exercise.className = 'p-2 border rounded-md w-full';
+
+            const duration = createInputField('Duration (min)');
+            const calories = createInputField('Calories Burned');
+
+            const deleteBtn = createDeleteButton(() => {
+                workouts = workouts.filter(w => w.container !== container);
+                container.remove();
+                updateWorkoutSummary();
+            });
+
+            [duration, calories].forEach(input => input.oninput = updateWorkoutSummary);
+
+            container.append(exercise, duration, calories, deleteBtn);
+            workoutsList.appendChild(container);
+            workouts.push({ container, duration, calories });
+
+            updateWorkoutSummary();
+        }
+
+        addMealBtn.addEventListener('click', createMealEntry);
+        addWorkoutBtn.addEventListener('click', createWorkoutEntry);
+
+        // BMI Calculator
+        document.getElementById("calculate-bmi").addEventListener("click", function () {
+            const heightInput = document.getElementById("height").value;
+            const weightInput = document.getElementById("weight").value;
+            const resultDiv = document.getElementById("bmi-result");
+            const bmiValueSpan = document.getElementById("bmi-value");
+            const categoryPara = document.getElementById("bmi-category");
+            const recommendationPara = document.getElementById("bmi-recommendation");
+
+            const height = parseFloat(heightInput);
+            const weight = parseFloat(weightInput);
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                bmiValueSpan.textContent = "--";
+                categoryPara.textContent = "Please enter valid height and weight.";
+                recommendationPara.textContent = "";
+                resultDiv.classList.remove("hidden");
+                resultDiv.classList.add("bg-red-100", "text-red-700");
+                return;
+            }
+
+            const heightInMeters = height / 100;
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+            bmiValueSpan.textContent = bmi;
+
+            // Determine BMI category
+            let category = "";
+            let recommendation = "";
+            resultDiv.classList.remove("bg-red-100", "text-red-700");
+
+            if (bmi < 18.5) {
+                category = "Underweight";
+                recommendation = "Consider a balanced diet with more calories.";
+            } else if (bmi < 24.9) {
+                category = "Normal weight";
+                recommendation = "Maintain your current lifestyle.";
+            } else if (bmi < 29.9) {
+                category = "Overweight";
+                recommendation = "Incorporate regular exercise and monitor your diet.";
+            } else {
+                category = "Obese";
+                recommendation = "Consult a healthcare provider for a fitness plan.";
+            }
+
+            categoryPara.textContent = `Category: ${category}`;
+            recommendationPara.textContent = recommendation;
+            resultDiv.classList.remove("hidden");
+            resultDiv.classList.add("bg-green-100", "text-green-700");
+            
+            // Update physical stats
+            document.getElementById("user-height").textContent = height;
+            document.getElementById("current-weight").textContent = weight;
+            document.getElementById("bmi").textContent = bmi;
+        });
+
+        // Quick BMI button
+        document.getElementById('quick-bmi-btn')?.addEventListener('click', () => {
+            const bmiSection = document.getElementById('bmi-calculator');
+            if (bmiSection) {
+                bmiSection.scrollIntoView({ behavior: 'smooth' });
+                // Auto-fill with current values if available
+                const currentHeight = document.getElementById('user-height').textContent;
+                const currentWeight = document.getElementById('current-weight').textContent;
+                
+                if (currentHeight && currentHeight !== '--') {
+                    document.getElementById('height').value = currentHeight;
+                }
+                if (currentWeight && currentWeight !== '--') {
+                    document.getElementById('weight').value = currentWeight;
+                }
+            }
+        });
+
+        // Update Fitness Goals
+        document.getElementById("update-goal").addEventListener("click", function () {
+            // Get selected goal and target weight input
+            const goalSelect = document.getElementById("fitness-goal-select");
+            const targetWeightInput = document.getElementById("target-weight-input");
+
+            const selectedGoal = goalSelect.options[goalSelect.selectedIndex].text;
+            const targetWeight = targetWeightInput.value;
+
+            // Update the Fitness Goal tab in the welcome section
+            document.getElementById("fitness-goal").textContent = selectedGoal;
+            document.getElementById("target-weight-display").textContent = targetWeight ? `${targetWeight} kg` : '--';
+            
+            // Show confirmation
+            alert("Fitness goals updated successfully!");
+        });
+
+        // Generate Report Button
+        document.getElementById("generate-report-btn").addEventListener("click", function() {
+    const userId = 1; // Replace with the actual user ID
+    window.location.href = `/generate_report/${userId}`; // Simple way to trigger download
+    // Alternatively, use fetch for more control:
+    
+    fetch(`/generate_report/${userId}`)
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `fitness_report_user_${userId}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => console.error('Error generating report:', error));
+    
+});
+        document.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/user/1') // Replace 1 with the actual user ID
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                document.getElementById('username').textContent = data.username;
+                document.getElementById('user-email').textContent = data.email;
+                document.getElementById('user-gender').textContent = data.gender;
+                document.getElementById('user-age').textContent = data.age;
+                document.getElementById('user-height').textContent = data.height;
+                document.getElementById('current-weight').textContent = data.weight;
+                document.getElementById('bmi').textContent = data.bmi || '--';
+                document.getElementById('fitness-goal').textContent = data.fitness_goal || '--';
+                document.getElementById('target-weight-display').textContent = data.target_weight ? `${data.target_weight} kg` : '--';
+
+                // Update meal and workout lists based on data.meals and data.workouts
+                meals = data.meals || [];
+                workouts = data.workouts || [];
+                renderMeals(); // You'll need to create this function
+                renderWorkouts(); // You'll need to create this function
+                updateMealSummary();
+                updateWorkoutSummary();
+            } else {
+                console.error('Failed to load user data');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user data:', error);
+        });
+
+    // ... (rest of your JavaScript for handling form submissions, etc.) ...
+});
+
+function renderMeals() {
+    mealsList.innerHTML = ''; // Clear existing list
+    if (meals.length === 0) {
+        mealsList.innerHTML = '<p class="text-gray-500">No meals logged today.</p>';
+    } else {
+        meals.forEach(mealData => {
+            const container = document.createElement('div');
+            container.className = 'flex gap-2 items-center';
+            container.innerHTML = `
+                <input type="number" placeholder="Calories (kcal)" class="p-2 border rounded-md w-full" value="<span class="math-inline">\{mealData\.calories\}"\>
+<input type\="number" placeholder\="Protein \(g\)" class\="p\-2 border rounded\-md w\-full" value\="</span>{mealData.protein}">
+                <input type="number" placeholder="Carbs (g)" class="p-2 border rounded-md w-full" value="${mealData.carbs}">
+                <button class="text-red-500 ml-2">❌</button>
+            `;
+            mealsList.appendChild(container);
+            // You'll need to add event listeners to these new elements
+        });
+    }
+}
+
+function renderWorkouts() {
+    workoutsList.innerHTML = '';
+    if (workouts.length === 0) {
+        workoutsList.innerHTML = '<p class="text-gray-500">No workouts logged today.</p>';
+    } else {
+        workouts.forEach(workoutData => {
+            const container = document.createElement('div');
+            container.className = 'flex gap-2 items-center';
+            container.innerHTML = `
+                <input type="text" placeholder="Exercise" class="p-2 border rounded-md w-full" value="<span class="math-inline">\{workoutData\.name\}"\>
+<input type\="number" placeholder\="Duration \(min\)" class\="p\-2 border rounded\-md w\-full" value\="</span>{workoutData.duration}">
+                <input type="number" placeholder="Calories Burned" class="p-2 border rounded-md w-full" value="${workoutData.calories_burned}">
+                <button class="text-red-500 ml-2">❌</button>
+            `;
+            workoutsList.appendChild(container);
+            // Add event listeners here
+        });
+    }
+}
+
+        // Fetch the user info from localStorage and display it on the dashboard
+        window.onload = function() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if (userInfo) {
+                document.getElementById('infoContainer').innerHTML = `
+                    <p><strong>Name:</strong> ${userInfo.name}</p>
+                    <p><strong>Age:</strong> ${userInfo.age}</p>
+                    <p><strong>Gender:</strong> ${userInfo.gender}</p>
+                    <p><strong>Email:</strong> ${userInfo.email}</p>
+                `;
+            } else {
+                document.getElementById('infoContainer').innerHTML = '<p>No personal info found.</p>';
+            }
+        };
+   
+
+    </script>
+</body>
+</html>

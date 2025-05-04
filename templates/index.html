@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Personalized Diet & Workout Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-indigo-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold">FitTrack</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-indigo-200">Home</a>
+                <a href="#features" class="hover:text-indigo-200">Features</a>
+                <a href="#about" class="hover:text-indigo-200">About</a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <section class="py-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Your Personalized Fitness Companion</h1>
+                <p class="text-xl mb-8">Track meals, log workouts, calculate BMI, and get tailored recommendations to reach your fitness goals.</p>
+                
+                <form id="userForm" class="mb-8">
+                    <div class="mb-4 text-black">
+                        <input type="text" id="name" placeholder="Name" class="w-full p-3 rounded-md" required>
+                    </div>
+                    <div class="mb-4 text-black">
+                        <input type="number" id="age" placeholder="Age" class="w-full p-3 rounded-md" required>
+                    </div>
+                    <div class="mb-4 text-black">
+                        <select id="gender" class="w-full p-3 rounded-md text-black" required>
+                            <option value="">Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4 text-black">
+                        <input type="email" id="email" placeholder="Email" class="w-full p-3 rounded-md" required>
+                    </div>
+                    <button type="submit" class="bg-white text-indigo-600 px-6 py-3 rounded-md font-medium text-lg hover:bg-indigo-50 transition">Get Started</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Key Features</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Meal Tracking</h3>
+                    <p>Log your daily meals with nutritional information and get insights into your eating habits.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Workout Logging</h3>
+                    <p>Record your exercises, sets, reps, and duration to track your fitness progress.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">BMI Calculator</h3>
+                    <p>Calculate your Body Mass Index and get personalized recommendations based on your goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">About FitTrack</h2>
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-lg mb-6">FitTrack is designed to help you achieve your fitness goals by providing a comprehensive platform to track your diet and workouts, calculate important metrics like BMI, and offer personalized suggestions based on your progress.</p>
+                <p class="text-lg">Whether you're looking to lose weight, maintain your current fitness level, or gain muscle, FitTrack provides the tools and insights you need to stay on track and motivated.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold">FitTrack</div>
+                    <p class="text-gray-400">Your personalized fitness companion</p>
+                </div>
+                
+            </div>
+            <div class="mt-8 text-center text-gray-400 text-sm">
+                &copy; 2023 FitTrack. All rights reserved.
+            </div>
+        </div>
+    </footer>
+<script>// script for hero section to save user info to localStorage
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+    
+        const userInfo = {
+            name: document.getElementById('name').value,
+            age: document.getElementById('age').value,
+            gender: document.getElementById('gender').value,
+            email: document.getElementById('email').value
+        };
+    
+        // Store the user info in localStorage
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    
+        // Redirect to dashboard after form submission
+        window.location.href = 'dashboard.html';
+    });
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
